@@ -1,0 +1,32 @@
+# Configuration for Cog ⚙️
+# Reference: https://cog.run/yaml
+
+build:
+  gpu: true
+  cuda: "12.1"
+  python_version: "3.11"
+  python_packages:
+    - "torch==2.4.1"
+    - "torchvision==0.19.1"
+    - "accelerate==1.0.0"
+    - "bitsandbytes==0.43.3"
+    - "datasets>=2.19.1"
+    - "ftfy==6.2.3"
+    - "huggingface-hub==0.23.2"
+    - "hf_transfer==0.1.8"
+    - "Jinja2==3.1.4"
+    - "transformers==4.44.0"
+    - "tensorboard==2.17.0"
+    - "peft==0.13.0"
+    - "pillow==10.4.0"
+    - "prodigyopt==1.0"
+    - "sentencepiece==0.2.0"
+    - "numpy<2"
+    - "wandb==0.17.8"
+    - "git+https://github.com/huggingface/diffusers.git@bfa0aa4ff2a59a1ce4d3dd9e1fc6683e8d7ea33c"
+
+  run:
+    - curl -o /usr/local/bin/pget -L "https://github.com/replicate/pget/releases/latest/download/pget_$(uname -s)_$(uname -m)" && chmod +x /usr/local/bin/pget
+
+# predict.py defines how predictions are run on your model
+predict: "predict.py:Predictor"
