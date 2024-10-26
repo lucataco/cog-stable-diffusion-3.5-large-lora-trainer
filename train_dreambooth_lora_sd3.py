@@ -145,6 +145,10 @@ For more details, including weighting, merging and fusing LoRAs, check the [docu
 ## License
 
 Please adhere to the licensing terms as described [here]({license_url}).
+
+## Training details
+
+Trained on Replicate using: [lucataco/stable-diffusion-3.5-large-lora-trainer](https://replicate.com/lucataco/stable-diffusion-3.5-large-lora-trainer)
 """
     model_card = load_or_create_model_card(
         repo_id_or_path=repo_id,
