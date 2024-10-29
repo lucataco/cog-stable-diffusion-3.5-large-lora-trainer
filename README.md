@@ -8,7 +8,7 @@ Make sure you have [Cog](https://github.com/replicate/cog) installed.
 
 To run a training prediction:
 
-    cog predict -i input_images=@example.zip
+    cog train -i input_images=@example.zip
 
 
 ## Licensing and commercial use
