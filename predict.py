@@ -39,6 +39,8 @@ class Predictor(BasePredictor):
         optimizer: str = Input(description="The optimizer type to use", default="AdamW", choices=["AdamW", "prodigy"]),
         learning_rate: float = Input(description="Initial learning rate to use (1.0 for Prodigy)", default=0.0001, ge=0.0001, le=1),
         lr_scheduler: str = Input(description="'The scheduler type to use", default="constant", choices=["linear", "cosine", "cosine_with_restarts", "polynomial", "constant", "constant_with_warmup"]),
+        train_text_encoder: bool = Input(description="Train the text encoder", default=False),
+        text_encoder_lr: float = Input(description="Text encoder learning rate to use", default=0.000005, ge=0.000005, le=1),
         checkpointing_steps: int = Input(description="Save a checkpoint of the training state every X updates", default=None, ge=100, le=6000),
         seed: int = Input(description="Seed for reproducibility", default=None),
         backend: str = Input(description="Dynamo Backend", default="no", choices=["no", "eager", "aot_eager", "inductor", "nvfuser", "aot_nvfuser", "aot_cudagraphs", "ofi", "fx2trt", "onnxrt", "ipex"]),
@@ -100,6 +102,7 @@ class Predictor(BasePredictor):
             "--gradient_accumulation_steps", str(gradient_accumulation_steps),
             "--optimizer", str(optimizer),
             "--learning_rate", str(learning_rate),
+            "--text_encoder_lr", str(text_encoder_lr),
             "--lr_scheduler", lr_scheduler,
             "--lr_warmup_steps", "0",
             "--max_train_steps", str(max_train_steps),
@@ -115,6 +118,10 @@ class Predictor(BasePredictor):
             run_params.extend(["--push_to_hub"])
             run_params.extend(["--hub_token", token])
             run_params.extend(["--hub_model_id", hub_model_id])
+
+        # Check if training text encoder
+        if train_text_encoder:
+            run_params.extend(["--train_text_encoder"])
 
         # Check to log training run to Wandb
         if wandb_api_key:
