@@ -1,5 +1,7 @@
 # Diffusers StableDiffusion3.5-Large LoRA Training Cog Model
 
+[![Try a demo on Replicate](https://replicate.com/lucataco/stable-diffusion-3.5-large-lora-trainer/badge)](https://replicate.com/lucataco/stable-diffusion-3.5-large-lora-trainer)
+
 Cog implementation of the [Diffusers Dreambooth LoRA Trainer](https://github.com/huggingface/diffusers/blob/main/examples/dreambooth/README_sd3.md)
 
 ## How to use
